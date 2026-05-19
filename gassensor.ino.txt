@@ -1,0 +1,38 @@
+const int gasSensorPin = A0;
+const int ledPin = 7;
+const int buzzerPin = 8;
+
+const int gasThreshold = 400;
+
+void setup() {
+
+  pinMode(ledPin, OUTPUT);
+  pinMode(buzzerPin, OUTPUT);
+
+  Serial.begin(9600);
+}
+
+void loop() {
+
+  int gasValue = analogRead(gasSensorPin);
+
+  Serial.print("Gas Value: ");
+  Serial.println(gasValue);
+
+  if (gasValue > gasThreshold) {
+
+    digitalWrite(ledPin, HIGH);
+    digitalWrite(buzzerPin, HIGH);
+
+    Serial.println("WARNING! Harmful Gas Detected!");
+
+  } else {
+
+    digitalWrite(ledPin, LOW);
+    digitalWrite(buzzerPin, LOW);
+
+    Serial.println("Air Quality Normal");
+  }
+
+  delay(1000);
+}  
